@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+	<display-name>Bidding</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>BiddingServlet</servlet-name>
+		<servlet-class>server.ws.BiddingServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BiddingServlet</servlet-name>
+		<url-pattern>/bidding</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ItemServlet</servlet-name>
+		<servlet-class>server.ws.ItemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemServlet</servlet-name>
+		<url-pattern>/Bidding/ItemServlet</url-pattern>
+	</servlet-mapping>
+	<session-config>
+		<cookie-config>
+			<path>/</path>
+		</cookie-config>
+	</session-config>
+</web-app>
