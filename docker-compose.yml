@@ -1,0 +1,59 @@
+version: "3.9"
+
+services:
+  authentication:
+    build:
+      context: ./Authentication
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - JAVA_OPTS=-Djava.net.preferIPv4Stack=true -Djava.net.bindAddress=0.0.0.0
+    networks:
+      - backend
+    volumes:
+      - ./Authentication/WebContent/WEB-INF:/app/WebContent/WEB-INF
+
+  bidding:
+    build:
+      context: ./Bidding
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - JAVA_OPTS=-Djava.net.preferIPv4Stack=true -Djava.net.bindAddress=0.0.0.0
+    networks:
+      - backend
+    volumes:
+      - ./Bidding/WebContent/WEB-INF:/app/WebContent/WEB-INF
+
+  payment:
+    build:
+      context: ./Payment
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    networks:
+      - backend
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - authentication
+      - bidding
+      - payment
+    networks:
+      - frontend
+      - backend
+
+networks:
+  frontend:
+  backend:
